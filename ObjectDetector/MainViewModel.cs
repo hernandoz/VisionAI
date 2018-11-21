@@ -8,6 +8,8 @@ using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction;
 using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Prediction.Models;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training;
+using Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training.Models;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Plugin.TextToSpeech;
@@ -44,6 +46,22 @@ namespace ObjectDetector
             AllPredictions = results.Predictions
                                     .Where(p => p.Probability > Probability)
                                     .ToList();
+           
+
+            // Create the Api, passing in the training key
+            CustomVisionTrainingClient trainingApi = new CustomVisionTrainingClient()
+            {
+                ApiKey = KeyService.TK,
+                Endpoint = KeyService.SouthCentralUsEndpoint
+            };
+
+            // Find the object detection domain
+
+            //var domains = trainingApi.GetDomains();
+            //var objDetectionDomain = domains.FirstOrDefault(d => d.Type == "ObjectDetection");
+
+            //upload to service
+            trainingApi.CreateImagesFromData(Guid.Parse(await KeyService.GetProjectId()), photo.GetStream(), null);
         }
 
         SKBitmap image;

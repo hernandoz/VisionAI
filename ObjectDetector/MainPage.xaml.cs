@@ -153,7 +153,7 @@ namespace ObjectDetector
             {
                 IsAntialias = true,
                 Style = SKPaintStyle.Stroke,
-                Color = SKColors.White,
+                Color = SKColors.Red,
                 StrokeWidth = 5,
                 PathEffect = SKPathEffect.CreateDash(new[] { 20f, 20f }, 20f)
             };
@@ -176,7 +176,7 @@ namespace ObjectDetector
             {
                 IsAntialias = true,
                 Style = SKPaintStyle.Stroke,
-                Color = SKColors.DarkSlateBlue,
+                Color = SKColors.DarkRed,
                 StrokeWidth = 1
             };
 

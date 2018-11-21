@@ -44,10 +44,10 @@ namespace ObjectDetector
             {
                 var endpoint = new PredictionEndpoint
                 {
-                    ApiKey = PredictionKey
+                    ApiKey = KeyService.PK
                 };
 
-                if (Guid.TryParse(ProjectId, out var pId))
+                if (Guid.TryParse(KeyService.PI, out var pId))
                 {
                     var imagePath = "ObjectDetector.Images.single.png";
                     var assembly = typeof(SettingsViewModel).GetTypeInfo().Assembly;
@@ -57,8 +57,8 @@ namespace ObjectDetector
                         await endpoint.PredictImageWithNoStoreAsync(pId, stream);
                     }
 
-                    await KeyService.SetPredictionKey(PredictionKey);
-                    await KeyService.SetProjectId(ProjectId);
+                    await KeyService.SetPredictionKey(KeyService.PK);
+                    await KeyService.SetProjectId(KeyService.PI);
 
                     Analytics.TrackEvent("Updating keys");
 
